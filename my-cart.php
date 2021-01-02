@@ -91,7 +91,7 @@ $cart = $_SESSION['cart'];
 						</tr>
 						<?php } ?>
                         <tr>
-                            <td colspan="2" rowspan="4"></td>
+                            <td colspan="3" rowspan="4"></td>
                             <td>
                                 subtotal
                             </td>
