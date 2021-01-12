@@ -4,6 +4,10 @@
     // unset($_SESSION['cart']);
     // print_r($_SESSION['cart']);
     // exit;
+    if (isset($_GET['transection']) && $_GET['transection'] =='success') {
+        echo "transection successfull.";
+        exit;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,11 +30,11 @@
             <h1>Shopping</h1>
             <div>
                 <a href="my-cart.php" id="<?php
-                if (!isset($_SESSION['cart'])) {
+                if (!isset($_SESSION['cart']) || count($_SESSION['cart']['item_name']) == 0) {
                     echo "cart-button";
                 }
                 ?>" class="btn btn-outline-primary button"><i class="fas fa-shopping-cart cart-icon"></i>Cart (<?php
-                if (isset($_SESSION['cart'])) {
+                if (isset($_SESSION['cart']) && count($_SESSION['cart']['item_name']) > 0 ) {
                     print_r(count($_SESSION['cart']['item_id']));
                 } else {
                     echo "*";
@@ -79,7 +83,13 @@
                         pro_price: price
                     },
                     success:function(data){
-                        $('.button').html("<i class='fas fa-shopping-cart cart-icon'></i>Cart ("+data+")");
+                        console.log(data);
+                        if (data > 0) {
+                            $('.button').html("<i class='fas fa-shopping-cart cart-icon'></i>Cart ("+data+")");
+                        } else {
+                            $('.button').html("<i class='fas fa-shopping-cart cart-icon'></i>Cart (*)");
+                            $('.button').setAttribute("id","cart-button");
+                        }
                         location.reload();
                     }
                 })

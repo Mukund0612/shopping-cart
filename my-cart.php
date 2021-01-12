@@ -1,5 +1,8 @@
 <?php
 include 'config.php';
+if (!isset($_SESSION['cart']) || count($_SESSION['cart']['item_name']) <= 0 ) {
+    header('Location: index.php');
+}
 $cart = $_SESSION['cart'];
 	// echo "<pre>";
 	// print_r($_SESSION['cart']);
@@ -27,7 +30,7 @@ $cart = $_SESSION['cart'];
             <img src="assets/images/logo.png" alt="" width="150px">
 			<h1>Shopping</h1>
 			<div>
-				<a href="my-cart.php" class="btn btn-outline-primary button"><i class="fas fa-shopping-cart cart-icon"></i>Home</a>
+				<a href="index.php" class="btn btn-outline-primary button"><i class="fas fa-shopping-cart cart-icon"></i>Home</a>
 			</div>
 			
 		</div>
